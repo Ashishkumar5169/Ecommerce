@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if not request.session.userid %}
+<script>
+    alert('You have login first...')
+    location.href = "/signin/"
+</script>
+{% endif %}
+<div class="fs-2 text-center pt-3 pb-3">Pending <b class="text-ocolor">Order
+    <i class="fa-solid fa-cart-shopping"></i>
+</b></div>
+<table class="table table-striped">
+    <tr>
+        <th>Order No</th>
+        <th>Product Picture</th>
+        <th>Price</th>
+        <th>After Discount</th>
+        <th>Size</th>
+        <th>Color</th>
+        <th>Product Delivery</th>
+        <th>Status</th>
+        <th>Order Date</th>
+        <th>Cancel</th>
+    </tr>
+    {% for i in pdata %}
+    <tr>
+        <td>{{i.11}}</td>
+        <td><img src="/{{i.7}}" style="max-height: 150px;" class="img-thumbnail" alt=""></td>
+        <td>{{i.1}}</td>
+        <td>{{i.2}}</td>
+        <td><span class="btn bg-ocolor">{{i.3}}</span></td>
+        <td><div style="height: 45px;width: 45px;border-radius: 3px;background: {{i.4}};"></div></td>
+        <td>{{i.6}}</td>
+        <td><span class="btn btn-danger">{{i.14}}</span></td>
+        <td>{{i.15}}</td>
+        <td><a href="/myorder?oid={{i.11}}" class="btn btn-sm btn-danger">Cancel <i class="fa-solid fa-xmark"></i></a></td>
+    </tr>
+    {% endfor %}
+</table>
+<!--Start Delivered Data-->
+<div class="fs-2 text-center pt-3 pb-3">Delivered <b class="text-ocolor">Order
+    <i class="fa-solid fa-cart-shopping"></i>
+</b></div>
+<table class="table table-striped">
+    <tr>
+        <th>Order No</th>
+        <th>Product Picture</th>
+        <th>Price</th>
+        <th>After Discount</th>
+        <th>Size</th>
+        <th>Color</th>
+        <th>Product Delivery</th>
+        <th>Status</th>
+        <th>Order Date</th>
+    </tr>
+    {% for i in ddata %}
+    <tr>
+        <td>{{i.11}}</td>
+        <td><img src="/{{i.7}}" style="max-height: 150px;" class="img-thumbnail" alt=""></td>
+        <td>{{i.1}}</td>
+        <td>{{i.2}}</td>
+        <td><span class="btn bg-ocolor">{{i.3}}</span></td>
+        <td><div style="height: 45px;width: 45px;border-radius: 3px;background: {{i.4}};"></div></td>
+        <td>{{i.6}}</td>
+        <td><span class="btn btn-success">{{i.14}}</span></td>
+        <td>{{i.15}}</td>
+        
+    </tr>
+    {% endfor %}
+</table>
+<!--end Delivered Data-->
+
+{% endblock %}

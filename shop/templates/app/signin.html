@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .a
+    {
+        border: 3px solid grey;
+        padding: 50px;
+    }
+    .b
+    {
+        background: lightgrey;
+        border: 1px solid grey;
+    }
+</style>
+<div class="fs-2 text-center pt-3">Login <b class="text-ocolor">Here..
+    <i class="fa-solid fa-cart-shopping"></i>
+</b></div>
+<div class="row pt-5">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 a">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="email" class="form-control b" required name="email" placeholder="Enter Email ...">
+            <input type="password" class="form-control mt-3 b" required name="passwd" placeholder="Enter Password ...">
+            <input type="submit" class="btn bg-bcolor text-white mt-3" value="Login Now">
+        </form>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+
+{% endblock %}

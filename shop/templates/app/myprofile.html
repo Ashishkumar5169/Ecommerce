@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $("#btne").click(function () {
+            $(".uform").slideDown("slow")
+        })
+    })
+</script>
+
+
+{% if not request.session.userid %}
+<script>
+    alert('You have login first...')
+    location.href = "/signin/"
+</script>
+{% endif %}
+
+<div class="fs-2 text-center pt-3">My <b class="text-ocolor">Profile
+        <i class="fa-solid fa-cart-shopping"></i>
+    </b></div>
+<div class="row pt-4">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="row">
+            {% for x in mdata %}
+            <div class="col-sm-12">
+                <!--Start card-->
+                <div class="card mb-3 w-100">
+                    <div class="row g-0">
+                        <div class="col-md-4 p-4">
+                            <img src="/{{x.ppic}}" style="min-height: 200px;" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <p class="card-title"><b>Name :</b> {{x.name}}</p>
+                                <p class="card-text"><b>Mobile :</b>{{x.mobile}}</p>
+                                <p class="card-text"><b>Email :</b>{{x.email}}</p>
+                                <p class="card-text"><b>Password :</b>{{x.passwd}}</p>
+                                <p class="card-text"><b>Address :</b>{{x.address}}</p>
+                                <a href="#" id="btne" class="btn bg-ocolor">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End card-->
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+<!--Start Form-->
+<style>
+    .txt {
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .txta {
+        height: 80px;
+        margin-bottom: 15px;
+    }
+
+    .uform {
+        display: none;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8 pt-5">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 uform">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" class="txt form-control" name="name" required placeholder="Enter Name...">
+
+                    <input type="password" class="txt form-control" name="passwd" required
+                        placeholder="Enter Password...">
+                    <input type="number" class="txt form-control" name="mob" required placeholder="Enter Mobile...">
+                    <input type="file" class="txt form-control" name="pic" required>
+                    <textarea class="form-control txta" name="address" placeholder="Address..." required></textarea>
+                    <input type="submit" value="Update" class="btn bg-bcolor text-white">
+                </form>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+<!--End Form-->
+{% endblock %}
